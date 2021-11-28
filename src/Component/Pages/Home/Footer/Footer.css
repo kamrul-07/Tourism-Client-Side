@@ -1,0 +1,11 @@
+.footer-text{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    color: rgb(172, 170, 170);
+    padding-top: 15px;
+
+}
+.footer{
+    background-color: rgb(31, 30, 30);
+    color: rgb(172,170,170);
+}

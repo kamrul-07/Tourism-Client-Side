@@ -1,10 +1,15 @@
+
 import React from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
+import useAuth from "../../Firebase/useAuth"
+
+
 import './Header.css'
 
 const Header = () => {
+  const {user,logOut}=useAuth();
     return (
         <div>
             <>
@@ -17,14 +22,25 @@ const Header = () => {
                   
               
               <Nav className="me-auto ms-3">
-                <Nav.Link as={HashLink} to ="/home#home">Home</Nav.Link>
-                <Nav.Link as={HashLink} to ="/home#home">My orders</Nav.Link>
-                <Nav.Link as={HashLink} to ="/home#home">Manage All Orders</Nav.Link>
-                <Nav.Link as={HashLink} to ="/home#home">Add a new service</Nav.Link>
+                <Nav.Link as={Link} to ="/home">Home</Nav.Link>
               </Nav>
-              <Nav className="me-auto ms-3">
+              
+              <Nav className="me-auto ms-1">
+            
+                {user?.email ?
+                <div className="d-flex">
+                  <Nav.Link as={Link} to ="/myOrder">My orders</Nav.Link>
+                <Nav.Link as={HashLink} to ="/">Manage All Orders</Nav.Link>
+                <Nav.Link as={Link} to ="/addnewService">Addnew service</Nav.Link>
+                  <button onClick={logOut} className="bg-dark text-white">LogOut</button>
+                </div>
+                :
                 <Nav.Link className="p-3" as={Link} to="/login">Login< i className="fas fa-sign-in-alt text-danger "></i></Nav.Link>
                 
+              }
+              <Navbar.Text>
+              <a href="#login"> {user?.displayName}</a>
+              </Navbar.Text>
                 
               </Nav>
               </Container>
